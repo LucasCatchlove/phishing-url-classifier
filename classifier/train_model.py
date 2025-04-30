@@ -3,7 +3,13 @@ import sklearn.ensemble
 import pandas as pd
 
 
-dataset = pd.read_csv('data/dataset_full.csv')
+dataset_raw = pd.read_csv('classifier/data/dataset_full.csv')
+
+dataset = subset = pd.concat([
+    dataset_raw.iloc[:, :4],         # Columns 0–3
+    dataset_raw.iloc[:, 16:21],      # Columns 10–19
+    dataset_raw.iloc[:, 30:]         # Columns 30 and beyond
+], axis=1)
 
 #feature labels and number of features for later use
 feature_names = list(dataset.columns.values)[:111]
@@ -11,7 +17,7 @@ num_features = len(feature_names)
 
 #split the csv into training data and labels
 X, y = dataset.iloc[:,0:111], dataset['phishing']
-
+print(X['time_domain_activation'])
 #split into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
