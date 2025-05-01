@@ -1,3 +1,4 @@
+import joblib
 from sklearn.model_selection import train_test_split
 import sklearn.ensemble
 import pandas as pd
@@ -17,7 +18,7 @@ num_features = len(feature_names)
 
 #split the csv into training data and labels
 X, y = dataset.iloc[:,0:111], dataset['phishing']
-print(X['time_domain_activation'])
+
 #split into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
@@ -42,5 +43,9 @@ print('{:.2%} training error'.format(1-training_accuracy))
 print('{:.2%} test accuracy'.format(test_accuracy))
 print('{:.2%} test error'.format(1-test_accuracy))
 
+joblib.dump(forest, 'classifier/models/random_forest_model.pkl')
+
 #for plotting purposes
 forest_acc = [training_accuracy*100, test_accuracy*100]
+
+
