@@ -1,1 +1,105 @@
-.venv
+# =====================
+# General Python Ignores
+# =====================
+
+# Compiled Python files
+# Byte-code files with an optional "optimization level" suffix.
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging (relevant if packaging your Flask app)
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.search.json
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.coverage
+.nox/
+.hypothesis/
+htmlcov/
+.pytest_cache/
+
+# mypy cache
+.mypy_cache/
+
+
+# ==================
+# Virtual Environment
+# ==================
+
+# Ignore the virtual environment directory
+# Common names include venv, .venv, env, .env
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+
+# =================
+# Editor/IDE Files
+# =================
+
+# Editor directories and files
+.vscode/ # Visual Studio Code
+.idea/ # PyCharm / IntelliJ IDEA
+*.swp # Vim swap files
+*~ # common editor backup files
+.#* # Emacs auto-save files
+*.sublime-workspace # Sublime Text
+*.sublime-project # Sublime Text
+
+
+# =================
+# OS-Specific Files
+# =================
+
+# OS-specific files
+.DS_Store # macOS
+Thumbs.db # Windows
+desktop.ini # Windows
+
+
+# ==============
+# Flask Specific
+# ==============
+
+# Development database files (e.g., SQLite used by Flask-SQLAlchemy)
+# Adjust these patterns based on where your database file is located and its name
+*.db # Catches files ending in .db anywhere
+instance/*.db # Catches .db files specifically in an 'instance' folder (common Flask pattern)
+
+# Log files
+*.log
+logs/*.log # If logs are in a specific 'logs' directory
+
+# Configuration/secrets files (if using environment variables via files)
+# This is critical if you store sensitive info here
+.env
+.flaskenv
+
+# Flask-Session filesystem storage (if used)
+# session/
