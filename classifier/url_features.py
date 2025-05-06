@@ -1,5 +1,4 @@
 from static_data import SECTIONS, SYMBOL_NAME_TO_SYMBOL
-import whois
 
 def extract_quantity_features(extracted_sections):
     qty_features = {}
@@ -16,7 +15,3 @@ def extract_section_length_features(extracted_sections):
         
 def extract_length_url_feature(url):
     return {"length_url": len(url)}
-
-def whois_information(url):
-    return whois.whois(url)
-
