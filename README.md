@@ -1,0 +1,1 @@
+building a simple frontend (react for now, might simply with vanialla html, js, css), api (flask), and backend services (url feature extractor) to allow for the phising url detection model I trained to be used (i.e. url is classified as fraudulent (phishing url) or legitimate). 
