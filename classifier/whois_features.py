@@ -1,9 +1,11 @@
 import whois
 from datetime import datetime
 from ping3 import ping
+import requests
 
 
 ISO_8601_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+  
 
 class UrlWhois:
 
@@ -33,6 +35,18 @@ class UrlWhois:
         delta = (expiration_date - current_date).days
         return delta if len(delta) else 0
     
-    def response_time_seconds():
-        pass
+    def response_time_seconds(self):
+        try:
+            response = requests.get(self.url)
+            return response.elapsed.total_seconds()
 
+        except:
+            print(f"Error retrieving {self.url}: {e}")
+            
+            
+            
+w = UrlWhois("https://google.ca")
+
+w.response_time_seconds()
+
+k=2
