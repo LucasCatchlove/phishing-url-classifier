@@ -8,9 +8,12 @@ import pandas as pd
 dataset_raw = pd.read_csv('classifier/data/dataset_full.csv')
 
 dataset = subset = pd.concat([
-    dataset_raw.iloc[:, :4],         # Columns 0–3
-    dataset_raw.iloc[:, 16:21],      # Columns 10–19
-    dataset_raw.iloc[:, 30:]         # Columns 30 and beyond
+    dataset_raw.iloc[:, :4],
+    dataset_raw.iloc[:, 16:21],    
+    dataset_raw.iloc[:, 36:38],  
+    dataset_raw.iloc[:, 40:76],
+    dataset_raw.iloc[:, 97:108],
+    dataset_raw.iloc[:, 111:]  
 ], axis=1)
 
 #feature labels and number of features for later use
@@ -60,6 +63,11 @@ def train_model(X, y, print_results=False):
 
 def save_model(model, filename=datetime.datetime.now()):
     joblib.dump(model, f'classifier/models/{filename}')
+    
+    
+train_model(X, y, print_results=True)
+
+
 
 
 
