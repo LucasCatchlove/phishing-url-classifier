@@ -4,20 +4,6 @@ from sklearn.model_selection import train_test_split
 import sklearn.ensemble
 import pandas as pd
 
-def totxt(list):
-    fpath = "o.txt"
-    delimiter = "\n"  # You can change this to a comma, tab (\t), etc.
-
-    try:
-        with open(fpath, mode="w", encoding="utf-8") as file:
-            # Convert all items to strings and join them
-            line_to_write = delimiter.join(str(item) for item in list)
-            file.write(line_to_write + "\n") # Optional: add a newline at the end of the line
-        print(f"List successfully written to {fpath}")
-    except IOError:
-        print(f"Error: Could not write to file {fpath}")
-
-
 dataset_raw = pd.read_csv('classifier/data/dataset_full.csv')
 
 y = dataset_raw['phishing']
@@ -32,9 +18,6 @@ X = subset = pd.concat([
 
 feature_names = list(subset.columns.values)
 num_features = len(feature_names)
-
-#split the csv into training data and labels
-# X, y = dataset.iloc[:,0:58], dataset['phishing']
 
 def train_model(X, y, print_results=False):
 
@@ -59,19 +42,18 @@ def train_model(X, y, print_results=False):
     '{:.2%} test error'.format(1 - test_accuracy),
 )
     
-    if print_results == True:
+    if print_results is True:
         print('{:.2%} training accuracy'.format(training_accuracy))
         print('{:.2%} training error'.format(1-training_accuracy))
         print('{:.2%} test accuracy'.format(test_accuracy))
         print('{:.2%} test error'.format(1-test_accuracy))
+    
+    joblib.dump(forest, 'classifier/models/model_v1.pkl')
         
     return (forest, formatted_results)
 
-def save_model(model, filename=datetime.datetime.now()):
-    joblib.dump(model, f'classifier/models/{filename}')
-    
-    
 train_model(X, y, print_results=True)
+
 
 
 
