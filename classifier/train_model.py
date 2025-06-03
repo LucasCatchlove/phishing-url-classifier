@@ -30,7 +30,7 @@ X = subset = pd.concat([
     dataset_raw.iloc[:, 97:108]
 ], axis=1)
 
-feature_names = list(subset.columns.values)[:111]
+feature_names = list(subset.columns.values)
 num_features = len(feature_names)
 
 #split the csv into training data and labels
@@ -38,21 +38,16 @@ num_features = len(feature_names)
 
 def train_model(X, y, print_results=False):
 
-    #split into training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-    #creation of validation sets for use with feature permutation from the training sets
     X_train, X_vali, y_train, y_vali = train_test_split(X_train, y_train, test_size=0.2)
 
-    #train the model
     forest = sklearn.ensemble.RandomForestClassifier(random_state=0).fit(X_train, y_train)
 
-    #training predictions and accuracy
     y_pred = forest.predict(X_train)
 
     training_accuracy = sklearn.metrics.accuracy_score(y_train, y_pred)
 
-    #test predictions and accuracy
     y_pred = forest.predict(X_test)
 
     test_accuracy = sklearn.metrics.accuracy_score(y_test, y_pred)

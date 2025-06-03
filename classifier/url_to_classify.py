@@ -1,18 +1,25 @@
-from typing import NewType
-import uuid
-
 
 class UrlToClassify:
-  
+      
     def __init__(self, url: str):
-        self.url = url
+        self.url: str = url
+        self.prediction: bool | None = None
+        self.features = None
         
         if not isinstance(url, str):
-            raise ValueError("url is not a string")
-        elif len(url.strip()) == 0:
+            raise TypeError(f"url is not a string (url provided is of type {type(url).__name__})")
+        if len(url.strip()) == 0:
             raise ValueError("url is an empty string")
-        else:
-            self.url = url
+        self.url = url
             
 
+    def get_features(self):
+        pass
+        
+    
+    def is_phishing(self):
+        if self.prediction is None: 
+            raise ValueError("no prediction has been made")
+        
+        return self.prediction
         
