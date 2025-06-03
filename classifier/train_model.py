@@ -4,26 +4,37 @@ from sklearn.model_selection import train_test_split
 import sklearn.ensemble
 import pandas as pd
 
+def totxt(list):
+    fpath = "o.txt"
+    delimiter = "\n"  # You can change this to a comma, tab (\t), etc.
+
+    try:
+        with open(fpath, mode="w", encoding="utf-8") as file:
+            # Convert all items to strings and join them
+            line_to_write = delimiter.join(str(item) for item in list)
+            file.write(line_to_write + "\n") # Optional: add a newline at the end of the line
+        print(f"List successfully written to {fpath}")
+    except IOError:
+        print(f"Error: Could not write to file {fpath}")
+
 
 dataset_raw = pd.read_csv('classifier/data/dataset_full.csv')
 
-dataset = subset = pd.concat([
+y = dataset_raw['phishing']
+
+X = subset = pd.concat([
     dataset_raw.iloc[:, :4],
     dataset_raw.iloc[:, 16:21],    
     dataset_raw.iloc[:, 36:38],  
     dataset_raw.iloc[:, 40:76],
-    dataset_raw.iloc[:, 97:108],
-    dataset_raw.iloc[:, 111:]  
+    dataset_raw.iloc[:, 97:108]
 ], axis=1)
 
-#feature labels and number of features for later use
-feature_names = list(dataset.columns.values)[:111]
+feature_names = list(subset.columns.values)[:111]
 num_features = len(feature_names)
 
 #split the csv into training data and labels
-X, y = dataset.iloc[:,0:111], dataset['phishing']
-X, y = dataset.iloc[:,0:111], dataset['phishing']
-
+# X, y = dataset.iloc[:,0:58], dataset['phishing']
 
 def train_model(X, y, print_results=False):
 
@@ -66,9 +77,6 @@ def save_model(model, filename=datetime.datetime.now()):
     
     
 train_model(X, y, print_results=True)
-
-
-
 
 
 
