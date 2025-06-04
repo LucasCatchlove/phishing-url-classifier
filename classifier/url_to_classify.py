@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from measured_features import MeasuredFeatures
 from url_structure_features import get_structural_features
 from static_data import FEATURE_LIST
@@ -9,7 +10,7 @@ class UrlToClassify:
     def __init__(self, url: str):
         self.url: str = url
         self.prediction: bool | None = None
-        self.features: None | dict[str, any] = None
+        self.features: None | dict[str, any] = dict.fromkeys(FEATURE_LIST)
         
         if not isinstance(url, str):
             raise TypeError(f"url is not a string (url provided is of type {type(url).__name__})")
@@ -27,16 +28,15 @@ class UrlToClassify:
         #to preserve ordering
         for feature_label in FEATURE_LIST:
             self.features[feature_label] = features[feature_label]
-            
-    def get_features(self):
-        if not self.features:
-            return self.build_features()
         
         return self.features
             
+    def get_features(self):
+        return self.build_features()
+
     def is_phishing(self):
         sample = self.get_features()
-        values = np.array([sample.values()])
-        return phishing_url_classifier.predict(values)
+        df = pd.DataFrame([sample])
+        return phishing_url_classifier.predict(df)
 
         

@@ -10,10 +10,13 @@ y = dataset_raw['phishing']
 
 X = subset = pd.concat([
     dataset_raw.iloc[:, :4],
-    dataset_raw.iloc[:, 16:21],    
+    dataset_raw.iloc[:, 16:17],  
+    dataset_raw.iloc[:, 18:21],      
     dataset_raw.iloc[:, 36:38],  
     dataset_raw.iloc[:, 40:76],
-    dataset_raw.iloc[:, 97:108]
+    # dataset_raw.iloc[:, 97:98],
+    # dataset_raw.iloc[:, 99:108],
+    
 ], axis=1)
 
 feature_names = list(subset.columns.values)
@@ -48,7 +51,7 @@ def train_model(X, y, print_results=False):
         print('{:.2%} test accuracy'.format(test_accuracy))
         print('{:.2%} test error'.format(1-test_accuracy))
     
-    joblib.dump(forest, 'classifier/models/model_v1.pkl')
+    joblib.dump(forest, 'classifier/models/model_v2_no_measured_features.pkl')
         
     return (forest, formatted_results)
 

@@ -27,19 +27,20 @@ class MeasuredFeatures:
             "time_domain_activation": self.days_since_domain_creation(),
             "time_domain_expiration": self.days_till_domain_expiration(),
             "time_response": self.response_time_seconds(),
+            "asn_ip": self.get_asn_ip()
         }
         
     def quantity_name_servers(self):
         try:
             answers = dns.resolver.query(self.domain, 'NS')
-            return len(answers)
+            return len(answers) if answers else 0
         except Exception as e:
             print(f"Error when determining quantity of name servers (NS): {e}")
 
     def quantity_mail_exchange_servers(self):
         try:
             answers = dns.resolver.query(self.domain, 'MX')
-            return len(answers)
+            return len(answers) if answers else 0
         except Exception as e:
             print(f"Error when determining quantity of mail exchange servers (MX): {e}")
 
@@ -108,7 +109,7 @@ class MeasuredFeatures:
             print(f"Error when determining quantity of redirects: {e}")
         
     def get_asn_ip(self):
-        ip_address = self.get_ip_from_domain(self.domain)
+        ip_address = self.get_ip_from_domain()
         try:
             obj = ipwhois.IPWhois(ip_address)
             results = obj.lookup_rdap()

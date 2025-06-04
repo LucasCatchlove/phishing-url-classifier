@@ -1,4 +1,4 @@
-URL_SECTIONS = ["domain", "directory", "file", "parameters"]
+URL_SECTIONS = ["domain", "directory", "file", "parameters", "url"]
 
 SYMBOL_NAME_TO_SYMBOL = {
     'and': '&',
@@ -20,6 +20,14 @@ SYMBOL_NAME_TO_SYMBOL = {
     'underline': '_'
 }
 
+SYMBOL_NAME_TO_GENERAL_URL_SYMBOL = {
+    'dot': '.',
+    'hyphen': '-',
+    'percent': '%',
+    'slash': '/',
+    'underline': '_'
+}
+
 
 FEATURE_LIST = [
     "qty_dot_url",
@@ -27,7 +35,7 @@ FEATURE_LIST = [
     "qty_underline_url",
     "qty_slash_url",
     "qty_percent_url",
-    "qty_tld_url",
+    # "qty_tld_url",
     "length_url",
     "qty_dot_domain",
     "qty_hyphen_domain",
@@ -70,7 +78,7 @@ FEATURE_LIST = [
     "qty_percent_file",
     "file_length",
     "time_response",
-    "domain_spf",
+    # "domain_spf",
     "asn_ip",
     "time_domain_activation",
     "time_domain_expiration",
