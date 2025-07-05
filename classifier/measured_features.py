@@ -49,7 +49,7 @@ class MeasuredFeatures:
             self.whois = whois.whois(self.url)
             
         current_date = datetime.now()
-        creation_date = datetime.strptime(str(self.whois.creation_date[0]), ISO_8601_DATE_FORMAT)
+        creation_date = datetime.strptime(str(self.whois.creation_date), ISO_8601_DATE_FORMAT)
         return (current_date - creation_date).days
     
     def days_till_domain_expiration(self):
@@ -57,7 +57,7 @@ class MeasuredFeatures:
             self.whois = whois.whois(self.url)
             
         current_date = datetime.now()
-        expiration_date = datetime.strptime(str(self.whois.expiration_date[0]), ISO_8601_DATE_FORMAT)
+        expiration_date = datetime.strptime(str(self.whois.expiration_date), ISO_8601_DATE_FORMAT)
         return (expiration_date - current_date).days
     
     def response_time_seconds(self):
